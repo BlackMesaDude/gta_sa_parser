@@ -1,0 +1,2 @@
+[console_scripts]
+gta_sa_parser = gta_sa_parser.cli:main

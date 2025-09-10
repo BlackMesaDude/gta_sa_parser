@@ -1,0 +1,448 @@
+{
+	"name": "NodeParser",
+	"pattern": "NODES*.dat",
+	"description": "Contains vehicle and peds path information as well as other data for intersections, lengths and headings.",
+	"structure": {
+		"name": "NODES_FILE",
+		"type": "struct",
+		"fields": [
+			{
+				"name": "header",
+				"type": "struct",
+				"fields": [
+					{
+						"name": "num_nodes",
+						"type": "Int32ul"
+					},
+					{
+						"name": "num_vehicle_nodes",
+						"type": "Int32ul"
+					},
+					{
+						"name": "num_ped_nodes",
+						"type": "Int32ul"
+					},
+					{
+						"name": "num_navi_nodes",
+						"type": "Int32ul"
+					},
+					{
+						"name": "num_links",
+						"type": "Int32ul"
+					}
+				]
+			},
+			{
+				"name": "vehicle_node",
+				"type": "array",
+				"count": "header.num_vehicle_nodes",
+				"elements": {
+					"type": "struct",
+					"fields": [
+						{
+							"name": "address",
+							"type": "Int32ul"
+						},
+						{
+							"name": "unused",
+							"type": "Int32ul"
+						},
+						{
+							"name": "X",
+							"scale": 8,
+							"type": "Int16sl"
+						},
+						{
+							"name": "Y",
+							"scale": 8,
+							"type": "Int16sl"
+						},
+						{
+							"name": "Z",
+							"scale": 8,
+							"type": "Int16sl"
+						},
+						{
+							"name": "cost",
+							"type": "Int16sl"
+						},
+						{
+							"name": "link_id",
+							"type": "Int16ul"
+						},
+						{
+							"name": "area_id",
+							"type": "Int16ul"
+						},
+						{
+							"name": "node_id",
+							"type": "Int16ul"
+						},
+						{
+							"name": "width",
+							"scale": 8,
+							"type": "Int8ul"
+						},
+						{
+							"name": "flood_fill",
+							"type": "Int8ul"
+						},
+						{
+							"name": "flags",
+							"type": "bitfield",
+							"size": 32,
+							"flags": [
+								{
+									"name": "link_count",
+									"bit": 0
+								},
+								{
+									"name": "traffic_level",
+									"bit": 4
+								},
+								{
+									"name": "is_roadblock",
+									"bit": 6
+								},
+								{
+									"name": "is_boat_only",
+									"bit": 7
+								},
+								{
+									"name": "is_emergency_only",
+									"bit": 8
+								},
+								{
+									"name": "unused_0",
+									"bit": 9
+								},
+								{
+									"name": "unknown_area_related_field_0",
+									"bit": 10
+								},
+								{
+									"name": "unused_1",
+									"bit": 11
+								},
+								{
+									"name": "is_not_highway",
+									"bit": 12
+								},
+								{
+									"name": "is_highway",
+									"bit": 13
+								},
+								{
+									"name": "unused_2",
+									"bit": 14
+								},
+								{
+									"name": "unused_3",
+									"bit": 15
+								},
+								{
+									"name": "spawn_probability",
+									"scale": "hex",
+									"bit": 16
+								},
+								{
+									"name": "is_roadblock_0",
+									"bit": 20
+								},
+								{
+									"name": "is_parking",
+									"bit": 21
+								},
+								{
+									"name": "unused_4",
+									"bit": 22
+								},
+								{
+									"name": "is_roadblock_1",
+									"bit": 23
+								},
+								{
+									"name": "unused_5",
+									"bit": 24
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"name": "ped_nodes",
+				"type": "array",
+				"count": "header.num_ped_nodes",
+				"elements": {
+					"type": "struct",
+					"fields": [
+						{
+							"name": "address",
+							"type": "Int32ul"
+						},
+						{
+							"name": "unused",
+							"type": "Int32ul"
+						},
+						{
+							"name": "X",
+							"scale": 8,
+							"type": "Int16sl"
+						},
+						{
+							"name": "Y",
+							"scale": 8,
+							"type": "Int16sl"
+						},
+						{
+							"name": "Z",
+							"scale": 8,
+							"type": "Int16sl"
+						},
+						{
+							"name": "cost",
+							"type": "Int16sl"
+						},
+						{
+							"name": "link_id",
+							"type": "Int16ul"
+						},
+						{
+							"name": "area_id",
+							"type": "Int16ul"
+						},
+						{
+							"name": "node_id",
+							"type": "Int16ul"
+						},
+						{
+							"name": "width",
+							"scale": 8,
+							"type": "Int8ul"
+						},
+						{
+							"name": "flood_fill",
+							"type": "Int8ul"
+						},
+						{
+							"name": "flags",
+							"type": "bitfield",
+							"size": 32,
+							"flags": [
+								{
+									"name": "link_count",
+									"bit": 0
+								},
+								{
+									"name": "traffic_level",
+									"bit": 4
+								},
+								{
+									"name": "is_roadblock",
+									"bit": 6
+								},
+								{
+									"name": "is_boat_only",
+									"bit": 7
+								},
+								{
+									"name": "is_emergency_only",
+									"bit": 8
+								},
+								{
+									"name": "unused_0",
+									"bit": 9
+								},
+								{
+									"name": "unknown_area_related_field_0",
+									"bit": 10
+								},
+								{
+									"name": "unused_1",
+									"bit": 11
+								},
+								{
+									"name": "is_not_highway",
+									"bit": 12
+								},
+								{
+									"name": "is_highway",
+									"bit": 13
+								},
+								{
+									"name": "unused_2",
+									"bit": 14
+								},
+								{
+									"name": "unused_3",
+									"bit": 15
+								},
+								{
+									"name": "spawn_probability",
+									"scale": "hex",
+									"bit": 16
+								},
+								{
+									"name": "is_roadblock_0",
+									"bit": 20
+								},
+								{
+									"name": "is_parking",
+									"bit": 21
+								},
+								{
+									"name": "unused_4",
+									"bit": 22
+								},
+								{
+									"name": "is_roadblock_1",
+									"bit": 23
+								},
+								{
+									"name": "unused_5",
+									"bit": 24
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"name": "navi_nodes",
+				"type": "array",
+				"count": "header.num_navi_nodes",
+				"elements": {
+					"type": "struct",
+					"fields": [
+						{
+							"name": "PosX",
+							"scale": 8,
+							"type": "Int16sl"
+						},
+						{
+							"name": "PosY",
+							"scale": 8,
+							"type": "Int16sl"
+						},
+						{
+							"name": "area_id",
+							"type": "Int16ul"
+						},
+						{
+							"name": "node_id",
+							"type": "Int16ul"
+						},
+						{
+							"name": "DirX",
+							"type": "Int8sl"
+						},
+						{
+							"name": "DirY",
+							"type": "Int8sl"
+						},
+						{
+							"name": "flags",
+							"type": "bitfield",
+							"size": 32,
+							"flags": [
+								{
+									"name": "path_node_width",
+									"bit": 0
+								},
+								{
+									"name": "num_left_lanes",
+									"bit": 8
+								},
+								{
+									"name": "num_right_lanes",
+									"bit": 11
+								},
+								{
+									"name": "traffic_light_dir_behavior",
+									"bit": 14
+								},
+								{
+									"name": "unused0",
+									"bit": 15
+								},
+								{
+									"name": "traffic_light_behavior_0",
+									"bit": 16
+								},
+								{
+									"name": "train_crossing",
+									"bit": 18
+								},
+								{
+									"name": "unused1",
+									"bit": 19
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"name": "links",
+				"type": "array",
+				"count": "header.num_links",
+				"elements": {
+					"type": "struct",
+					"fields": [
+						{
+							"name": "area_id",
+							"type": "Int16ul"
+						},
+						{
+							"name": "node_id",
+							"type": "Int16ul"
+						}
+					]
+				}
+			},
+			{
+				"name": "padding_0",
+				"type": "bytes",
+				"size": 768
+			},
+			{
+				"name": "link_lengths",
+				"type": "array",
+				"count": "header.num_links",
+				"elements": {
+					"type": "struct",
+					"fields": [
+						{
+							"name": "length",
+							"type": "Int8ul"
+						}						
+					]
+				}
+			},
+			{
+				"name": "intersection",
+				"type": "array",
+				"count": "header.num_nodes",
+				"elements": {
+					"type": "struct",
+					"fields": [
+						{
+							"name": "is_roadcrossing",
+							"type": "char"
+						},
+						{
+							"name": "is_trafficlight",
+							"type": "char"
+						}
+					]
+				}
+			},
+			{
+				"name": "padding_1",
+				"type": "bytes",
+				"size": 192
+			}
+		]
+	}
+}
