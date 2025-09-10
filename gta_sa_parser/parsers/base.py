@@ -1,4 +1,3 @@
-# gta_node_parser/parsers/base.py
 from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Dict, Any
